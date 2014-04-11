@@ -10,4 +10,8 @@ class Auteur {
 		nom blank: false
 		prenom blank: false
     }
+	
+	String toString() {
+		nom + " " + prenom
+	}
 }
