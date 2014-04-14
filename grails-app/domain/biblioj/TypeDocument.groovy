@@ -2,9 +2,9 @@ package biblioj
 
 class TypeDocument {
 	String intitule
-    static constraints = {
+	static constraints = {
 		intitule blank: false
-    }
+	}
 	
 	String toString() {
 		intitule

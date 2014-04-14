@@ -15,7 +15,21 @@
 			</ul>
 		</div>
 		<div id="list-livre" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+			<h1><g:message code="default.list.label" args="[entityName]" /></h1><br>
+			<form name="input" action="listRecherche" method="get">
+				&nbsp;&nbsp;&nbsp;&nbsp;Type = 
+				<select name="type">
+					<option></option>
+					<g:each var="type" in="${listeDesTypes}">
+					    <option>${type.intitule}</option>
+					</g:each>
+				</select>    &nbsp;&nbsp;&nbsp;&nbsp;
+				Auteur = <input type="text" name="auteur">    &nbsp;&nbsp;&nbsp;&nbsp;
+				Titre = <input type="text" name="titre">    &nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="submit" value="Submit"><br><br><br>
+			</form>
+				
+			
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -24,30 +38,28 @@
 					<tr>
 					
 						<g:sortableColumn property="titre" title="${message(code: 'livre.titre.label', default: 'Titre')}" />
-					
-						<g:sortableColumn property="nombreExemplaires" title="${message(code: 'livre.nombreExemplaires.label', default: 'Nombre Exemplaires')}" />
-					
-						<g:sortableColumn property="nombreExemplairesDisponibles" title="${message(code: 'livre.nombreExemplairesDisponibles.label', default: 'Nombre Exemplaires Disponibles')}" />
-					
+						
+						<g:sortableColumn property="auteurs" title="${message(code: 'livre.auteurs.label', default: 'Auteurs')}" />
+						
 						<th><g:message code="livre.type.label" default="Type" /></th>
-					
+						
+						<g:sortableColumn property="nombreExemplairesDisponibles" title="${message(code: 'livre.nombreExemplairesDisponibles.label', default: 'Nombre Exemplaires Disponibles')}" />
+						
 					</tr>
 				</thead>
 				<tbody>
-				
-			
-				
+
 				
 				<g:each in="${livreFiltre}" status="i" var="livreInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
 						<td><g:link action="show" id="${livreInstance.id}">${fieldValue(bean: livreInstance, field: "titre")}</g:link></td>
 					
-						<td>${fieldValue(bean: livreInstance, field: "nombreExemplaires")}</td>
-					
-						<td>${fieldValue(bean: livreInstance, field: "nombreExemplairesDisponibles")}</td>
+						<td>${fieldValue(bean: livreInstance, field: "auteurs")}</td>
 					
 						<td>${fieldValue(bean: livreInstance, field: "type")}</td>
+					
+						<td>${fieldValue(bean: livreInstance, field: "nombreExemplairesDisponibles")}</td>
 					
 					</tr>
 				</g:each>

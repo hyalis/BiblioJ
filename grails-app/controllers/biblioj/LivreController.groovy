@@ -15,9 +15,35 @@ class LivreController {
         [livreInstanceList: Livre.list(params), livreInstanceTotal: Livre.count()]
     }
 	
-	def listRecherche(Integer max) {
+	def listRecherche(Integer max, String type, String auteur, String titre) {
 		params.max = Math.min(max ?: 10, 100)
-		[livreFiltre: Livre.findAllByTitreLike("%a%"), livreInstanceTotal: Livre.findAllByTitre("Babar").count(null)]
+		
+		def typeReq = params.type
+		def auteurReq = params.auteur
+		def titreReq = params.titre
+		
+		
+		if(typeReq == null)
+			typeReq = ""
+		if(auteurReq == null)
+			auteurReq = ""
+		if(titreReq == null)
+			titreReq = ""
+			
+		def c = Livre.createCriteria()
+		def results = c.listDistinct {
+			'in'("type", TypeDocument.findAllByIntituleLike("%" + typeReq + "%"))
+			auteurs{
+				like("nom", "%"+auteurReq+"%")
+			}
+			like("titre", "%"+titreReq+"%")
+			order("titre","asc")
+			
+			
+			
+		}
+		
+		[livreFiltre: results, livreInstanceTotal: results.count(null), listeDesTypes: TypeDocument.list()]
 	}
 
     def create() {
