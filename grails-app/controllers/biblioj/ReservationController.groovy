@@ -1,6 +1,5 @@
 package biblioj
 
-import org.springframework.dao.DataIntegrityViolationException
 
 class ReservationController {
 
@@ -89,14 +88,31 @@ class ReservationController {
             return
         }
 
-        try {
-            reservationInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'reservation.label', default: 'Reservation'), id])
-            redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'reservation.label', default: 'Reservation'), id])
-            redirect(action: "show", id: id)
-        }
+        reservationInstance.delete(flush: true)
+        flash.message = message(code: 'default.deleted.message', args: [message(code: 'reservation.label', default: 'Reservation'), id])
+        redirect(action: "list")
     }
+	
+	def rapport(Integer max) {
+		[monRapport:"Hey Salut"]
+	}
+	
+	def validation(Integer max) {
+		
+		def maxReservation = 66
+		List listeDesLivres = new ArrayList<Livre>()
+		for(int i = 1; session["panier"] != null && i<session["panier"].size(); i++){
+			println("Nb : " + Livre.findById(session["panier"][i].getId()).getNombreExemplairesDisponibles())
+			if(session["panier"][i] != null && Livre.findById(session["panier"][i].getId()).getNombreExemplairesDisponibles() > 0){
+				Livre livreAAjouter = Livre.findById(session["panier"][i].getId())
+				listeDesLivres.add(session["panier"][i])
+				livreAAjouter.setNombreExemplairesDisponibles(livreAAjouter.getNombreExemplairesDisponibles()-1)
+			}
+		}
+		println(listeDesLivres)
+		Reservation nouvelleReservation = new Reservation( code : maxReservation, dateReservation : new Date("29/12/2014"), livres : listeDesLivres )
+		nouvelleReservation.save()
+		
+		redirect(action: "list")
+	}
 }

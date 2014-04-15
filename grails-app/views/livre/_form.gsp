@@ -1,4 +1,4 @@
-<%@ page import="biblioj.Livre" %>
+Livre.findById(1)<%@ page import="biblioj.Livre" %>
 
 
 

@@ -1,16 +1,18 @@
 package biblioj
 
-import org.springframework.dao.DataIntegrityViolationException
-
 class LivreController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
+	
     def index() {
         redirect(action: "list", params: params)
     }
 
-    def list(Integer max) {
+    def list(Integer max, Integer idLivre) {
+		if(session["panier"] == null)
+			session["panier"] = []
+		session["panier"].add(Livre.findById(idLivre))
+		
         params.max = Math.min(max ?: 10, 100)
         [livreInstanceList: Livre.list(params), livreInstanceTotal: Livre.count()]
     }
@@ -120,14 +122,28 @@ class LivreController {
             return
         }
 
-        try {
+
             livreInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'livre.label', default: 'Livre'), id])
             redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'livre.label', default: 'Livre'), id])
-            redirect(action: "show", id: id)
-        }
+       
     }
+	
+	def viderPanier() {
+		session["panier"] = []
+		def targetUri = params.targetUri ?: "/"
+		redirect(uri: targetUri)
+	}
+	
+	def removeItemPanier(Integer idItem){
+		for(int i = 1; session["panier"] != null && i<session["panier"].size(); i++){
+			if(session["panier"][i] != null && session["panier"][i].getId() == idItem){
+				session["panier"].remove(i)
+				def targetUri = params.targetUri ?: "/"
+				redirect(uri: targetUri)
+				return(0)
+			}
+		}
+	}
+	
 }

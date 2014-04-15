@@ -57,8 +57,6 @@ class BootStrap {
 		l1.ajouteLivreAReservation(r1)
 		l2.ajouteLivreAReservation(r1)
 		
-		l2.ajouteLivreAReservation(r2)
-		
 		l1.ajouteLivreAReservation(r3)
 		l3.ajouteLivreAReservation(r3)
 		

@@ -5,7 +5,6 @@ class Reservation {
 	Date dateReservation
 	static hasMany = [livres : Livre]
 	
-	
     static constraints = {
 		code blank: false
 		dateReservation blank: false

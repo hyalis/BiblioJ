@@ -54,7 +54,7 @@
 				line-height: 1.5;
 				margin: 0.25em 0;
 			}
-
+			
 			#controller-list ul {
 				list-style-position: inside;
 			}
