@@ -99,19 +99,20 @@ class ReservationController {
 	
 	def validation(Integer max) {
 		
-		def maxReservation = 66
+		def maxReservation = 54854		//TODO chopper me MAX
 		List listeDesLivres = new ArrayList<Livre>()
+		
 		for(int i = 1; session["panier"] != null && i<session["panier"].size(); i++){
-			println("Nb : " + Livre.findById(session["panier"][i].getId()).getNombreExemplairesDisponibles())
-			if(session["panier"][i] != null && Livre.findById(session["panier"][i].getId()).getNombreExemplairesDisponibles() > 0){
-				Livre livreAAjouter = Livre.findById(session["panier"][i].getId())
-				listeDesLivres.add(session["panier"][i])
+			if(session["panier"][i] != null && Livre.findById(session["panier"][i].id).getNombreExemplairesDisponibles() > 0){
+				Livre livreAAjouter = Livre.findById(session["panier"][i].id)
+				listeDesLivres.add(livreAAjouter)
 				livreAAjouter.setNombreExemplairesDisponibles(livreAAjouter.getNombreExemplairesDisponibles()-1)
 			}
 		}
-		println(listeDesLivres)
 		Reservation nouvelleReservation = new Reservation( code : maxReservation, dateReservation : new Date("29/12/2014"), livres : listeDesLivres )
 		nouvelleReservation.save()
+		
+		//Vider le panier
 		
 		redirect(action: "list")
 	}
