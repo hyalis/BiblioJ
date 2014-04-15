@@ -11,8 +11,11 @@ class LivreControllerTests {
 
     def populateValidParams(params) {
         assert params != null
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
+		TypeDocument typeLivre = new TypeDocument( intitule : "Livre adulte" )
+        params["titre"] = "Rien ne s'oppose à la nuit : roman"
+		params["type"] = typeLivre
+		params["nombreExemplaires"] = 5
+		params["nombreExemplairesDisponibles"] = 5
     }
 
     void testIndex() {
@@ -76,7 +79,7 @@ class LivreControllerTests {
 
         populateValidParams(params)
         def livre = new Livre(params)
-
+		
         assert livre.save() != null
 
         params.id = livre.id
@@ -101,8 +104,11 @@ class LivreControllerTests {
 
         // test invalid parameters in update
         params.id = livre.id
-        //TODO: add invalid values to params object
-
+		TypeDocument typeLivre = new TypeDocument( intitule : "Livre adulte" )
+		params["titre"] = ""
+		params["type"] = typeLivre
+		params["nombreExemplaires"] = 5
+		params["nombreExemplairesDisponibles"] = 5
         controller.update()
 
         assert view == "/livre/edit"

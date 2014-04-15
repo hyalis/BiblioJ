@@ -11,8 +11,8 @@ class ReservationControllerTests {
 
     def populateValidParams(params) {
         assert params != null
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
+        params["code"] = 1
+		params["dateReservation"] = new Date("25/04/1992")
     }
 
     void testIndex() {
@@ -101,8 +101,10 @@ class ReservationControllerTests {
 
         // test invalid parameters in update
         params.id = reservation.id
-        //TODO: add invalid values to params object
 
+		params["code"] = ""
+		params["dateReservation"] = ""
+		
         controller.update()
 
         assert view == "/reservation/edit"

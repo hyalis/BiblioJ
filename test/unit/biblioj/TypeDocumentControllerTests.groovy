@@ -11,8 +11,7 @@ class TypeDocumentControllerTests {
 
     def populateValidParams(params) {
         assert params != null
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
+        params["intitule"] = 'someValidName'
     }
 
     void testIndex() {
@@ -101,7 +100,7 @@ class TypeDocumentControllerTests {
 
         // test invalid parameters in update
         params.id = typeDocument.id
-        //TODO: add invalid values to params object
+        params["intitule"] = ""
 
         controller.update()
 

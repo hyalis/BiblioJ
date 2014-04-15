@@ -11,7 +11,20 @@ import org.junit.*
 @TestFor(Auteur)
 class AuteurTests {
 
-    void testSomething() {
-       fail "Implement me"
+   void testCreation() {
+		Auteur auteur = new Auteur( nom : "Prolapse", prenom: "colon" )
+		assert auteur != null
+		assert auteur.save() != null
     }
+
+	void testCreationBlank() {
+		Auteur auteur = new Auteur( nom : "", prenom: "" )
+		assert auteur != null
+		assert auteur.save() == null
+	}
+
+	void testToString() {
+		Auteur auteur = new Auteur( nom : "Prolapse", prenom: "colon" )
+		assert auteur.toString() == "Prolapse colon"
+	}
 }
