@@ -39,7 +39,7 @@
 		<div id="panier"><b>Votre panier :</b><br>
 			<%
 				String livresDuPanier = ''
-				for(int i = 1; session.panier != null && i<session.panier.size(); i++){
+				for(int i = 0; session.panier != null && i<session.panier.size(); i++){
 					if(session.panier[i] != null){
 						livresDuPanier += link(action:'removeItemPanier',controller:'livre',params:['targetUri': (request.forwardURI - request.contextPath), 'idItem':session.panier[i].getId()]) { '<button>X</button>' + session.panier[i].getTitre() + '<br>' }
 					}
@@ -47,7 +47,7 @@
 			 %>
 			 ${livresDuPanier}
 			 <br>
-			<g:link controller="reservation" action="validation"><button>Valider</button></g:link>
+			<g:link controller="reservation" action="rapport"><button>Valider</button></g:link>
 			<g:link params="[targetUri: (request.forwardURI - request.contextPath)]" controller="livre" action="viderPanier"><button>Vider</button></g:link>
 		</div>
 		<div id="grailsLogo" role="banner"><a href="http://grails.org"><img src="${resource(dir: 'images', file: 'grails_logo.png')}" alt="Grails"/></a></div>

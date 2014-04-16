@@ -1,6 +1,5 @@
 package biblioj
 
-import org.springframework.dao.DataIntegrityViolationException
 
 class AuteurController {
 
@@ -89,14 +88,8 @@ class AuteurController {
             return
         }
 
-        try {
-            auteurInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'auteur.label', default: 'Auteur'), id])
-            redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'auteur.label', default: 'Auteur'), id])
-            redirect(action: "show", id: id)
-        }
+        auteurInstance.delete(flush: true)
+        flash.message = message(code: 'default.deleted.message', args: [message(code: 'auteur.label', default: 'Auteur'), id])
+        redirect(action: "list")
     }
 }

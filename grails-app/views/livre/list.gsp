@@ -52,7 +52,7 @@
 							<td>
 								<%
 									String boutonAjouter = ""
-									if(livreInstance.nombreExemplairesDisponibles>0)
+									if(livreInstance.nombreExemplairesDisponibles>0 && !session.panier.id.contains(livreInstance.id))
 										boutonAjouter = '<button name="idLivre" type="submit" value="' + livreInstance.id +'">Ajouter</button>'
 								 %>
 								${boutonAjouter}

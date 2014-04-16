@@ -94,26 +94,31 @@ class ReservationController {
     }
 	
 	def rapport(Integer max) {
-		[monRapport:"Hey Salut"]
-	}
-	
-	def validation(Integer max) {
-		
-		def maxReservation = 54854		//TODO chopper me MAX
 		List listeDesLivres = new ArrayList<Livre>()
+		int maxCode = Reservation.findById(Reservation.count()).code
 		
-		for(int i = 1; session["panier"] != null && i<session["panier"].size(); i++){
+		println "maxCode = " + maxCode
+		
+		maxCode++
+		
+		for(int i = 0; session["panier"] != null && i<session["panier"].size(); i++){
 			if(session["panier"][i] != null && Livre.findById(session["panier"][i].id).getNombreExemplairesDisponibles() > 0){
 				Livre livreAAjouter = Livre.findById(session["panier"][i].id)
 				listeDesLivres.add(livreAAjouter)
 				livreAAjouter.setNombreExemplairesDisponibles(livreAAjouter.getNombreExemplairesDisponibles()-1)
 			}
 		}
-		Reservation nouvelleReservation = new Reservation( code : maxReservation, dateReservation : new Date("29/12/2014"), livres : listeDesLivres )
+		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.add(Calendar.DATE, 1);
+		Date dateRetrait = new Date(cal.getTimeInMillis())
+		Reservation nouvelleReservation = new Reservation( code : maxCode, dateReservation : dateRetrait, livres : listeDesLivres )
 		nouvelleReservation.save()
 		
-		//Vider le panier
+		session["panier"] = []
+		[code : maxCode, dateRet :dateRetrait.toGMTString()]
 		
-		redirect(action: "list")
 	}
+	
 }

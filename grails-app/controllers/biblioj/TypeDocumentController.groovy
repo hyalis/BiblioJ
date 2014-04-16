@@ -1,6 +1,5 @@
 package biblioj
 
-import org.springframework.dao.DataIntegrityViolationException
 
 class TypeDocumentController {
 
@@ -89,14 +88,8 @@ class TypeDocumentController {
             return
         }
 
-        try {
-            typeDocumentInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'typeDocument.label', default: 'TypeDocument'), id])
-            redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'typeDocument.label', default: 'TypeDocument'), id])
-            redirect(action: "show", id: id)
-        }
+        typeDocumentInstance.delete(flush: true)
+        flash.message = message(code: 'default.deleted.message', args: [message(code: 'typeDocument.label', default: 'TypeDocument'), id])
+        redirect(action: "list")
     }
 }

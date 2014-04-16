@@ -15,3 +15,6 @@ class Auteur {
 		nom + " " + prenom
 	}
 }
+
+
+

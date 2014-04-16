@@ -7,18 +7,23 @@ class LivreController {
     def index() {
         redirect(action: "list", params: params)
     }
+	
+	def ajouteLivreDansPanier(Integer idLivre){
+		if(session["panier"] == null)
+		session["panier"] = []
+		if(idLivre!= null && Livre.findById(idLivre).nombreExemplairesDisponibles>0 && !session.panier.id.contains(Livre.findById(idLivre).id))
+			session["panier"].add(Livre.findById(idLivre))
+		}
 
     def list(Integer max, Integer idLivre) {
-		if(session["panier"] == null)
-			session["panier"] = []
-		session["panier"].add(Livre.findById(idLivre))
-		
+		ajouteLivreDansPanier(idLivre)
         params.max = Math.min(max ?: 10, 100)
         [livreInstanceList: Livre.list(params), livreInstanceTotal: Livre.count()]
     }
 	
-	def listRecherche(Integer max, String type, String auteur, String titre) {
-		params.max = Math.min(max ?: 10, 100)
+	def listRecherche(Integer max, String type, String auteur, String titre, Integer idLivre) {
+		ajouteLivreDansPanier(idLivre)
+		params.max = Math.min(max ?: 5, 100)
 		
 		def typeReq = params.type
 		def auteurReq = params.auteur
