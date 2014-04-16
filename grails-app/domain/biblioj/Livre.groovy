@@ -4,9 +4,13 @@ class Livre {
 	String titre
 	int nombreExemplaires
 	int nombreExemplairesDisponibles
+	TypeDocument type
 	static hasMany = [reservations : Reservation, auteurs : Auteur]
 	static belongsTo = Reservation
-	TypeDocument type 
+	 
+	static mapping = {
+		auteurs lazy : false
+	}
 	
     static constraints = {
 		titre blank : false
