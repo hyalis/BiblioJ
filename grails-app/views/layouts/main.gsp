@@ -13,18 +13,20 @@
 				position: fixed;
 				right: 15px;
 				margin-top : 20px;
-				padding: 5px;
+				padding: 10px;
 				float : right;
 				width : 200px;
 				height : auto;
 				text-align : left;
-				background-color: #747474;
+				background-color: #4B8DB3;
+				border-radius: 5px;
 				color: white;
+				font-size: 15px;
+			}
+			#panier a{
+				color : red;
 			}
 			
-			#panier a{
-				color: white;
-			}
 		</style>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
@@ -41,16 +43,25 @@
 				String livresDuPanier = ''
 				for(int i = 0; session.panier != null && i<session.panier.size(); i++){
 					if(session.panier[i] != null){
-						livresDuPanier += link(action:'removeItemPanier',controller:'livre',params:['targetUri': (request.forwardURI - request.contextPath), 'idItem':session.panier[i].getId()]) { '<button>X</button>' + session.panier[i].getTitre() + '<br>' }
+						livresDuPanier += link(action:'removeItemPanier',controller:'livre',params:['targetUri': (request.forwardURI - request.contextPath), 'idItem':session.panier[i].getId()]) { 'X' }
+						livresDuPanier += '  ' + session.panier[i].getTitre() + '<br>'
 					}
 				}
 			 %>
 			 ${livresDuPanier}
 			 <br>
-			<g:link controller="reservation" action="rapport"><button>Valider</button></g:link>
-			<g:link params="[targetUri: (request.forwardURI - request.contextPath)]" controller="livre" action="viderPanier"><button>Vider</button></g:link>
+			 <%
+				String btn = ''
+				if(session.panier.size()>0){
+					btn += link(action:'rapport',controller:'reservation') { '<button>Valider</button>    ' }
+					btn += link(action:'viderPanier',controller:'livre', params:[targetUri: (request.forwardURI - request.contextPath)]) { '<button>Vider</button>' }
+				} else {
+					btn = 'Panier vide'
+				}
+			%>
+			${btn}
 		</div>
-		<div id="grailsLogo" role="banner"><a href="http://grails.org"><img src="${resource(dir: 'images', file: 'grails_logo.png')}" alt="Grails"/></a></div>
+		<div id="grailsLogo" role="banner"><a href="/BiblioJ"><img src="http://www.tunandroid.com/content/wp-content/uploads/2011/03/GoogleBooksLogo.png"  alt="Grails" id="logoBiblio"/> <h1>BiblioJ</h1></a></div>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>

@@ -42,13 +42,37 @@ body {
 	margin: 0 auto;
 	max-width: 960px;
 	overflow-x: hidden; /* prevents box-shadow causing a horizontal scrollbar in firefox when viewport < 960px wide */
-	   -moz-box-shadow: 0 0 0.3em #255b17;
-	-webkit-box-shadow: 0 0 0.3em #255b17;
-	        box-shadow: 0 0 0.3em #255b17;
+	box-shadow: 5px 5px 100px #000000;
+	margin-top: 15px;
+	border-bottom-right-radius: 20px;
+	border-bottom-left-radius: 20px;
 }
 
 #grailsLogo {
-	background-color: #abbf78;
+	
+	background-image: url(http://www.domainedechantilly.com/sites/default/files/imagecache/diaporama_740x350/Biblioth%C3%A8que%20du%20th%C3%A9%C3%A2tre%20%C2%A9%20Otte.jpg);
+	background-position: 50% 50%;
+	background-size: cover;
+}
+
+#grailsLogo a h1{
+	float : left;
+	color: #FFFFFF;
+	font-weight: normal;
+	font-size: 50px;
+	margin: 10px 10px 10px 30px;
+}
+
+#logoBiblio{
+float : left;
+	width : 75px;
+}
+
+#rapport{
+	width: 600px;
+	margin-left: 25%;
+	margin-top: 20px;
+	padding: 15px;
 }
 
 /* replace with .no-boxshadow body if you have modernizr available */
@@ -73,7 +97,7 @@ a:hover, a:active {
 }
 
 h1 {
-	color: #48802c;
+	color: #2E6CC9;
 	font-weight: normal;
 	font-size: 1.25em;
 	margin: 0.8em 0 0.3em 0;
@@ -108,13 +132,15 @@ img {
 }
 
 .footer {
-	background: #abbf78;
+	background: #4B8DB3;
 	color: #000;
 	clear: both;
 	font-size: 0.8em;
 	margin-top: 1.5em;
 	padding: 1em;
 	min-height: 1em;
+	border-bottom-right-radius: 20px;
+	border-bottom-left-radius: 20px;
 }
 
 .footer a {
