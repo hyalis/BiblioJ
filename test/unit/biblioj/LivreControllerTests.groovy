@@ -158,4 +158,23 @@ class LivreControllerTests {
         assert Livre.get(livre.id) == null
         assert response.redirectedUrl == '/livre/list'
     }
+	
+	void testViderPanier()
+	{
+		session["panier"] = []
+		session["panier"].add(new Livre( titre : "Rien ne s'oppose à la nuit : roman", type : new TypeDocument( intitule : "Nouveauté" ), nombreExemplaires : 5, nombreExemplairesDisponibles : 5 ))
+		session["panier"].add(new Livre( titre : "Rien ne s'oppose à la nuit : roman", type : new TypeDocument( intitule : "Nouveauté" ), nombreExemplaires : 5, nombreExemplairesDisponibles : 5 ))
+		controller.viderPanier()
+		assert session["panier"].size() == 0
+	}
+	
+	void testRemoveItemPanier()
+	{
+		Livre livre = new Livre( titre : "TESTnuit : roman", type : new TypeDocument( intitule : "Nouveauté" ), nombreExemplaires : 5, nombreExemplairesDisponibles : 5 )
+		session["panier"] = []
+		session["panier"].add(new Livre( titre : "Rien ne s'oppose à la nuit : roman", type : new TypeDocument( intitule : "Nouveauté" ), nombreExemplaires : 5, nombreExemplairesDisponibles : 5 ))
+		session["panier"].add(livre)
+		controller.removeItemPanier(livre.getId())
+		assert session["panier"].size() == 1
+	}
 }

@@ -13,7 +13,7 @@ class LivreController {
 		session["panier"] = []
 		if(idLivre!= null && Livre.findById(idLivre).nombreExemplairesDisponibles>0 && !session.panier.id.contains(Livre.findById(idLivre).id))
 			session["panier"].add(Livre.findById(idLivre))
-		}
+	}
 
     def list(Integer max, Integer idLivre) {
 		ajouteLivreDansPanier(idLivre)

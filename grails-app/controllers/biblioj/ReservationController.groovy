@@ -95,11 +95,15 @@ class ReservationController {
 	
 	def rapport(Integer max) {
 		List listeDesLivres = new ArrayList<Livre>()
-		int maxCode = Reservation.findById(Reservation.count()).code
-		
-		println "maxCode = " + maxCode
-		
-		maxCode++
+		int maxCode
+		if( Reservation.count() != 0)
+		{
+			 maxCode = Reservation.findById(Reservation.count()).code
+			 maxCode++
+		} else {
+			maxCode = 1
+		}
+
 		
 		for(int i = 0; session["panier"] != null && i<session["panier"].size(); i++){
 			if(session["panier"][i] != null && Livre.findById(session["panier"][i].id).getNombreExemplairesDisponibles() > 0){

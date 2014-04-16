@@ -154,4 +154,14 @@ class ReservationControllerTests {
         assert Reservation.get(reservation.id) == null
         assert response.redirectedUrl == '/reservation/list'
     }
+	
+	/*void testRapport() {
+		session["panier"] = []
+		session["panier"].add(new Livre( titre : "Rien ne s'oppose à la nuit : roman", type : new TypeDocument( intitule : "Nouveauté" ), nombreExemplaires : 5, nombreExemplairesDisponibles : 5 ))
+		session["panier"].add(new Livre( titre : "DUDE", type : new TypeDocument( intitule : "Nouveauté" ), nombreExemplaires : 5, nombreExemplairesDisponibles : 5 ))
+		
+		def model = controller.rapport()
+
+		assert session["panier"].size() == 0
+	}*/
 }

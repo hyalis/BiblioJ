@@ -5,28 +5,29 @@ import biblioj.TypeDocument
 
 class BootStrap {
 	def init = { servletContext ->
-		TypeDocument t1 = new TypeDocument( intitule : "Nouveauté" )
+
+		TypeDocument t1 = new TypeDocument( intitule : "Nouveaute" )
 		TypeDocument t2 = new TypeDocument( intitule : "Livre ado" )
 		TypeDocument t3 = new TypeDocument( intitule : "Livre adulte" )
 		
 		Auteur a1 = new Auteur( nom : "Vigan", prenom : "Delphine" )
 		Auteur a2 = new Auteur( nom : "Collins", prenom : "Suzanne" )
 		Auteur a3 = new Auteur( nom : "Stockett", prenom : "Kathryn" )
-		Auteur a4 = new Auteur( nom : "Carère", prenom : "Emmanuel" )
+		Auteur a4 = new Auteur( nom : "Carere", prenom : "Emmanuel" )
 		Auteur a5 = new Auteur( nom : "Murakami", prenom : "Haruki" )
 		Auteur a6 = new Auteur( nom : "Delacourt", prenom : "Gregoire" )
 		Auteur a7 = new Auteur( nom : "Larsson", prenom : "Stieg" )
 		
-		Livre l1 = new Livre( titre : "Rien ne s'oppose à la nuit : roman", type : t1, nombreExemplaires : 5, nombreExemplairesDisponibles : 5 )
+		Livre l1 = new Livre( titre : "Rien ne s'oppose a la nuit : roman", type : t1, nombreExemplaires : 5, nombreExemplairesDisponibles : 5 )
 		Livre l2 = new Livre( titre : "La couleur des sentiments", type : t1, nombreExemplaires : 5, nombreExemplairesDisponibles : 5 )
 		Livre l3 = new Livre( titre : "Limonov", type : t1, nombreExemplaires : 5, nombreExemplairesDisponibles : 5 )
 		Livre l4 = new Livre( titre : "1Q84. 1. Avril-juin", type : t1, nombreExemplaires : 5, nombreExemplairesDisponibles : 5 )
-		Livre l5 = new Livre( titre : "1Q84. 3. Octobre-décembre", type : t1, nombreExemplaires : 5, nombreExemplairesDisponibles : 5 )
+		Livre l5 = new Livre( titre : "1Q84. 3. Octobre-decembre", type : t1, nombreExemplaires : 5, nombreExemplairesDisponibles : 5 )
 		Livre l6 = new Livre( titre : "1Q84. 2. Juillet-septembre", type : t1, nombreExemplaires : 5, nombreExemplairesDisponibles : 5 )
 		
 		Livre l7 = new Livre( titre : "Hunger games", type : t2, nombreExemplaires : 8, nombreExemplairesDisponibles : 8 )
 		Livre l8 = new Livre( titre : "L'embrasement", type : t2, nombreExemplaires : 10, nombreExemplairesDisponibles : 10 )
-		Livre l9 = new Livre( titre : "La révolte", type : t2, nombreExemplaires : 10, nombreExemplairesDisponibles : 10 )
+		Livre l9 = new Livre( titre : "La revolte", type : t2, nombreExemplaires : 10, nombreExemplairesDisponibles : 10 )
 		
 		Livre l10 = new Livre( titre : "La liste de mes envies", type : t3, nombreExemplaires : 10, nombreExemplairesDisponibles : 10 )
 		Livre l11 = new Livre( titre : "La reine dans le palais des courants d'air", type : t3, nombreExemplaires : 10, nombreExemplairesDisponibles : 10 )
