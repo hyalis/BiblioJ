@@ -41,7 +41,7 @@
 		<div id="panier"><b>Votre panier :</b><br>
 			<%
 				String livresDuPanier = ''
-				for(int i = 0; session.panier != null && i<session.panier.size(); i++){
+				for(int i = 0; session.panier != null && i<session.panier?.size(); i++){
 					if(session.panier[i] != null){
 						livresDuPanier += link(action:'removeItemPanier',controller:'livre',params:['targetUri': (request.forwardURI - request.contextPath), 'idItem':session.panier[i].getId()]) { 'X' }
 						livresDuPanier += '  ' + session.panier[i].getTitre() + '<br>'
@@ -52,7 +52,7 @@
 			 <br>
 			 <%
 				String btn = ''
-				if(session.panier.size()>0){
+				if(session.panier?.size()>0){
 					btn += link(action:'rapport',controller:'reservation') { '<button>Valider</button>    ' }
 					btn += link(action:'viderPanier',controller:'livre', params:[targetUri: (request.forwardURI - request.contextPath)]) { '<button>Vider</button>' }
 				} else {

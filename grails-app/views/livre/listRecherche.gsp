@@ -24,7 +24,7 @@
 					    <option>${type.intitule}</option>
 					</g:each>
 				</select>    &nbsp;&nbsp;&nbsp;&nbsp;
-				Auteur = <input type="text" name="auteur">    &nbsp;&nbsp;&nbsp;&nbsp;
+				Auteur(nom) = <input type="text" name="auteur">    &nbsp;&nbsp;&nbsp;&nbsp;
 				Titre = <input type="text" name="titre">    &nbsp;&nbsp;&nbsp;&nbsp;
 				<input type="submit" value="Submit"><br><br><br>
 			</form>
